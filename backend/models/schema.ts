@@ -24,5 +24,5 @@ export const BasicInfo = pgTable("basic_info",{
 })
 
 
-export const TUser = typeof Users.$inferSelect;
-export const TBasicInfo = typeof BasicInfo.$inferSelect
+export type TUser = typeof Users.$inferSelect;
+export type TBasicInfo = typeof BasicInfo.$inferSelect

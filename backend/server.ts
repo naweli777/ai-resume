@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-// import  authRoute  from "./routes/auth.js";
+import  resumeRouter  from "./routes/resume.js";
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
   res.send("Backend is running");
 });
 
-// app.use("/api/auth", authRoute);
+app.use("/api/resume", resumeRouter);
 
 app.listen(PORT, () => {
   console.log(`Server Running On PORT ${PORT}`);
