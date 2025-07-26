@@ -1,7 +1,48 @@
+<<<<<<< HEAD
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 const Dashboard = () => {
+=======
+'use client'
+import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
+import { useState } from "react";
+
+const Dashboard = () => {
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [parsedData, setParsedData] = useState<any>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setResumeFile(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!resumeFile) {
+      alert("Please select a resume file.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("resumeFile", resumeFile);
+
+    try {
+      const res = await fetch("http://localhost:5000/api/resume/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      setParsedData(data.data);
+      console.log("Parsed Resume Info:", data);
+    } catch (error) {
+      console.error("Upload failed", error);
+    }
+  };
+>>>>>>> 3a78735 (UI Uodate)
   return (
     <Paper
       sx={{
@@ -18,6 +59,7 @@ const Dashboard = () => {
       <form action="/upload" method="post" encType="multipart/form-data">
         <Grid container spacing={3}>
           <Grid size={{ xs: 12, md: 6 }}>
+<<<<<<< HEAD
             <Button
               component="label"
               role={undefined}
@@ -27,6 +69,12 @@ const Dashboard = () => {
             >
               Upload files
             </Button>
+=======
+           <input type="file" name="resumeFile" onChange={handleFileChange} />
+          <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
+            Upload Resume
+          </Button>
+>>>>>>> 3a78735 (UI Uodate)
           </Grid>
 
           <Grid size={{ xs: 12, md: 6 }}>
